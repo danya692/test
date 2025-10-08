@@ -22,7 +22,7 @@ API ключи для интеграции с корейскими автоау�
 Клонируйте репозиторий
 
 bash
-git clone '''https://github.com/korea-auto-direct/platform.git'''
+git clone https://github.com/korea-auto-direct/platform.git
 cd korea-auto-direct
 Установите зависимости
 
