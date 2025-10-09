@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Карьера{% endblock %}
+
+{% block content %}
+<section class="career-hero">
+    <h1>Построй карьеру с KOREA AUTO DIRECT</h1>
+    <p>Присоединяйтесь к нашей команде профессионалов</p>
+</section>
+
+<section class="job-vacancies">
+    <h2>Открытые вакансии</h2>
+    <div class="jobs-grid">
+        {% for job in jobs %}
+        <div class="job-card">
+            <h3>{{ job.title }}</h3>
+            <div class="job-details">
+                <span class="salary">{{ job.salary }}</span>
+                <span class="experience">Опыт: {{ job.experience }}</span>
+            </div>
+            <div class="job-description">
+                <p>Мы ищем специалиста для работы в динамично развивающейся компании.</p>
+            </div>
+            <button class="apply-btn" onclick="applyForJob('{{ job.title }}')">Откликнуться</button>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="benefits">
+    <h2>Мы предлагаем</h2>
+    <div class="benefits-list">
+        <div class="benefit-item">
+            <span class="benefit-icon"></span>
+            <h4>Конкурентная зарплата</h4>
+            <p>Достойное вознаграждение и бонусы</p>
+        </div>
+        <div class="benefit-item">
+            <span class="benefit-icon"></span>
+            <h4>Гибкий график</h4>
+            <p>Возможность удаленной работы</p>
+        </div>
+        <div class="benefit-item">
+            <span class="benefit-icon"></span>
+            <h4>Корпоративный авто</h4>
+            <p>Служебный автомобиль для работы</p>
+        </div>
+        <div class="benefit-item">
+            <span class="benefit-icon"></span>
+            <h4>Карьерный рост</h4>
+            <p>Возможности для профессионального развития</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function applyForJob(jobTitle) {
+    const email = 'hr@koreaautodirect.ru';
+    const subject = 'Отклик на вакансию: ${jobTitle}';
+    const body = 'Здравствуйте!\n\nЯ хотел(а) бы откликнуться на вакансию "${jobTitle}".\n\nМое резюме прикреплено к письму.\n\nС уважением, [Ваше Имя]';
+    
+    window.location.href = 'mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}';
+}
+</script>
+{% endblock %}

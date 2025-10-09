@@ -1,0 +1,35 @@
+from flask import Flask,render_template, session
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    name = session.get('user_name', "")
+    return render_template ("index.html", name = "Даня")
+
+@app.route("/Hi/<name>")
+def Hi(name):
+    return 'Привет мой господин' +  name
+
+@app.route('/catalog')
+def catalog():
+    return 'Каталог'
+
+@app.route('/career/')
+def career():
+    return 'Карьера'
+
+@app.route('/feedback/')
+def feedback():
+    return 'Обратная связь'
+
+@app.route("/company/")
+def company():
+    return 'О компании'
+
+@app.route("/contact/")
+def contact():
+    return 'Контакты'
+
+if __name__ == "__main__":
+    app.run()
