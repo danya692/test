@@ -3,6 +3,350 @@
 {% block title %}Карьера{% endblock %}
 
 {% block content %}
+<style>
+    .career-hero {
+        text-align: center;
+        padding: 4rem 0;
+        background: linear-gradient;
+        color: white;
+    }
+    
+    .career-hero h1 {
+        font-size: 2.5rem;
+        font-weight: 300;
+        margin-bottom: 1rem;
+    }
+    
+    .career-hero p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        font-weight: 300;
+    }
+    
+    .job-vacancies {
+        padding: 4rem 0;
+        text-align: center;
+        background: white;
+    }
+    
+    .job-vacancies h2 {
+        font-size: 2rem;
+        font-weight: 300;
+        color: #2c3e50;
+        margin-bottom: 3rem;
+    }
+    
+    .jobs-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+    
+    .job-card {
+        background: #f8f9fa;
+        padding: 2rem;
+        border-radius: 12px;
+        text-align: center;
+        transition: transform 0.3s ease;
+        border: 1px solid #eaeaea;
+    }
+    
+    .job-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .job-card h3 {
+        font-size: 1.3rem;
+        font-weight: 400;
+        color: #2c3e50;
+        margin-bottom: 1rem;
+    }
+    
+    .job-details {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+    }
+    
+    .salary {
+        background: #2ecc71;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+    
+    .experience {
+        background: #3498db;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+    
+    .job-description {
+        margin-bottom: 2rem;
+    }
+    
+    .job-description p {
+        color: #7f8c8d;
+        line-height: 1.6;
+        font-weight: 300;
+    }
+    
+    .apply-btn {
+        width: 100%;
+        padding: 1rem;
+        background: #e74c3c;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+    
+    .apply-btn:hover {
+        background: #c0392b;
+    }
+    
+    .benefits {
+        padding: 4rem 0;
+        text-align: center;
+        background: #f8f9fa;
+    }
+    
+    .benefits h2 {
+        font-size: 2rem;
+        font-weight: 300;
+        color: #2c3e50;
+        margin-bottom: 3rem;
+    }
+    
+    .benefits-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+    
+    .benefit-item {
+        background: white;
+        padding: 2rem 1.5rem;
+        border-radius: 12px;
+        text-align: center;
+        transition: transform 0.3s ease;
+        border: 1px solid #eaeaea;
+    }
+    
+    .benefit-item:hover {
+        transform: translateY(-3px);
+    }
+    
+    .benefit-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        display: block;
+    }
+    
+    .benefit-item:nth-child(1) .benefit-icon::before { content: ""; }
+    .benefit-item:nth-child(2) .benefit-icon::before { content: ""; }
+    .benefit-item:nth-child(3) .benefit-icon::before { content: ""; }
+    .benefit-item:nth-child(4) .benefit-icon::before { content: ""; }
+    
+    .benefit-item h4 {
+        font-size: 1.2rem;
+        font-weight: 400;
+        color: #2c3e50;
+        margin-bottom: 1rem;
+    }
+    
+    .benefit-item p {
+        color: #7f8c8d;
+        line-height: 1.6;
+        font-weight: 300;
+    }
+    
+    .registration-section {
+        padding: 4rem 0;
+        text-align: center;
+        background: white;
+    }
+    
+    .registration-section h2 {
+        font-size: 2rem;
+        font-weight: 300;
+        color: #2c3e50;
+        margin-bottom: 2rem;
+    }
+    
+    .registration-form {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+    
+    .form-group {
+        margin-bottom: 1.5rem;
+        text-align: left;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #2c3e50;
+        font-weight: 400;
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid #e0e0e0;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+        box-sizing: border-box;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+        outline: none;
+        border-color: #3498db;
+    }
+    
+    .form-group textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+    
+    .register-btn {
+        width: 100%;
+        padding: 1rem;
+        background: #2ecc71;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        margin-top: 1rem;
+    }
+    
+    .register-btn:hover {
+        background: #27ae60;
+    }
+    
+    .apply-modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        animation: fadeIn 0.3s ease;
+    }
+    
+    .apply-modal-content {
+        background-color: white;
+        margin: 5% auto;
+        padding: 2rem;
+        border-radius: 12px;
+        width: 90%;
+        max-width: 500px;
+        position: relative;
+        animation: slideIn 0.3s ease;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    @keyframes slideIn {
+        from { 
+            opacity: 0;
+            transform: translateY(-50px);
+        }
+        to { 
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .modal-close {
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #7f8c8d;
+        background: none;
+        border: none;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .modal-close:hover {
+        background: #f8f9fa;
+        border-radius: 50%;
+    }
+    
+    .apply-modal h3 {
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: #2c3e50;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+    
+    .job-title-display {
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 6px;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        color: #2c3e50;
+        font-weight: 500;
+        border-left: 4px solid #3498db;
+    }
+    
+    @media (max-width: 768px) {
+        .jobs-grid,
+        .benefits-list {
+            grid-template-columns: 1fr;
+            padding: 0 1rem;
+        }
+        
+        .job-details {
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .career-hero h1 {
+            font-size: 2rem;
+        }
+    }
+</style>
+
 <section class="career-hero">
     <h1>Построй карьеру с KOREA AUTO DIRECT</h1>
     <p>Присоединяйтесь к нашей команде профессионалов</p>
@@ -21,7 +365,7 @@
             <div class="job-description">
                 <p>Мы ищем специалиста для работы в динамично развивающейся компании.</p>
             </div>
-            <button class="apply-btn" onclick="applyForJob('{{ job.title }}')">Откликнуться</button>
+            <button class="apply-btn" onclick="showApplyModal('{{ job.title }}')">Откликнуться</button>
         </div>
         {% endfor %}
     </div>
@@ -52,16 +396,143 @@
         </div>
     </div>
 </section>
+
+<section class="registration-section">
+    <h2>Стать частью нашей команды</h2>
+    <div class="registration-form">
+        <form onsubmit="submitRegistration(event)">
+            <div class="form-group">
+                <label for="regFullName">ФИО *</label>
+                <input type="text" id="regFullName" name="fullName" required placeholder="Иванов Иван Иванович">
+            </div>
+            <div class="form-group">
+                <label for="regPhone">Номер телефона *</label>
+                <input type="tel" id="regPhone" name="phone" required placeholder="+7 (999) 123-45-67">
+            </div>
+            <div class="form-group">
+                <label for="regEmail">Электронная почта *</label>
+                <input type="email" id="regEmail" name="email" required placeholder="ivanov@example.com">
+            </div>
+            <div class="form-group">
+                <label for="regPosition">Желаемая должность</label>
+                <select id="regPosition" name="position">
+                    <option value="">Выберите должность</option>
+                    <option value="Менеджер по продажам">Менеджер по продажам</option>
+                    <option value="Логист">Логист</option>
+                    <option value="Маркетолог">Маркетолог</option>
+                    <option value="Другая">Другая должность</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="regExperience">Опыт работы</label>
+                <textarea id="regExperience" name="experience" placeholder="Опишите ваш опыт работы..."></textarea>
+            </div>
+            <button type="submit" class="register-btn">Отправить заявку</button>
+        </form>
+    </div>
+</section>
+
+<div id="applyModal" class="apply-modal">
+    <div class="apply-modal-content">
+        <button class="modal-close" onclick="closeApplyModal()">&times;</button>
+        <div class="apply-form">
+            <h3>Отклик на вакансию</h3>
+            <div class="job-title-display" id="applyJobTitle"></div>
+            <form onsubmit="submitApplication(event)">
+                <div class="form-group">
+                    <label for="applyFullName">ФИО *</label>
+                    <input type="text" id="applyFullName" name="fullName" required placeholder="Иванов Иван Иванович">
+                    </div>
+                <div class="form-group">
+                    <label for="applyPhone">Номер телефона *</label>
+                    <input type="tel" id="applyPhone" name="phone" required placeholder="+7 (999) 123-45-67">
+                </div>
+                <div class="form-group">
+                    <label for="applyEmail">Электронная почта *</label>
+                    <input type="email" id="applyEmail" name="email" required placeholder="ivanov@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="applyMessage">Сопроводительное письмо</label>
+                    <textarea id="applyMessage" name="message" placeholder="Расскажите о себе и почему вы хотите работать в нашей компании..."></textarea>
+                </div>
+                <button type="submit" class="register-btn">Отправить отклик</button>
+            </form>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
 
 {% block scripts %}
 <script>
-function applyForJob(jobTitle) {
-    const email = 'hr@koreaautodirect.ru';
-    const subject = 'Отклик на вакансию: ${jobTitle}';
-    const body = 'Здравствуйте!\n\nЯ хотел(а) бы откликнуться на вакансию "${jobTitle}".\n\nМое резюме прикреплено к письму.\n\nС уважением, [Ваше Имя]';
-    
-    window.location.href = 'mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}';
+let currentJobTitle = '';
+
+function showApplyModal(jobTitle) {
+    currentJobTitle = jobTitle;
+    document.getElementById('applyJobTitle').textContent = jobTitle;
+    document.getElementById('applyModal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
 }
+
+function closeApplyModal() {
+    document.getElementById('applyModal').style.display = 'none';
+    currentJobTitle = '';
+    document.body.style.overflow = 'auto';
+}
+
+function submitApplication(event) {
+    event.preventDefault();
+    
+    const fullName = document.getElementById('applyFullName').value;
+    const phone = document.getElementById('applyPhone').value;
+    const email = document.getElementById('applyEmail').value;
+    const message = document.getElementById('applyMessage').value;
+    
+    // Отправка через email
+    const subject = 'Отклик на вакансию: ${currentJobTitle}';
+    const body = 'Здравствуйте!\n\nЯ хотел(а) бы откликнуться на вакансию "${currentJobTitle}".\n\nФИО: ${fullName}\nТелефон: ${phone}\nEmail: ${email}\n\nСопроводительное письмо:\n${message}\n\nС уважением, ${fullName}';
+    
+    window.location.href = 'mailto:hr@koreaautodirect.ru?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}';
+    
+    closeApplyModal();
+    event.target.reset();
+}
+
+function submitRegistration(event) {
+    event.preventDefault();
+    
+    const fullName = document.getElementById('regFullName').value;
+    const phone = document.getElementById('regPhone').value;
+    const email = document.getElementById('regEmail').value;
+    const position = document.getElementById('regPosition').value;
+    const experience = document.getElementById('regExperience').value;
+    
+    // Отправка через email
+    const subject = 'Заявка на работу в KOREA AUTO DIRECT';
+    const body = 'Здравствуйте!\n\nЯ хотел(а) бы присоединиться к вашей команде.\n\nФИО: ${fullName}\nТелефон: ${phone}\nEmail: ${email}\nЖелаемая должность: ${position}\n\nОпыт работы:\n${experience}\n\nС уважением, ${fullName}';
+    
+    window.location.href = 'mailto:hr@koreaautodirect.ru?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}';
+    
+    alert('Спасибо за вашу заявку! Мы свяжемся с вами в ближайшее время.');
+    event.target.reset();
+}
+
+// Закрытие модального окна при клике вне его
+window.onclick = function(event) {
+    const modal = document.getElementById('applyModal');
+    if (event.target == modal) {
+        closeApplyModal();
+    }
+}
+
+// Маска для телефона
+document.getElementById('applyPhone')?.addEventListener('input', function(e) {
+    let x = e.target.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
+    e.target.value = '+7' + (x[2] ? ' (' + x[2] : '') + (x[3] ? ') ' + x[3] : '') + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : '');
+});
+document.getElementById('regPhone')?.addEventListener('input', function(e) {
+    let x = e.target.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
+    e.target.value = '+7' + (x[2] ? ' (' + x[2] : '') + (x[3] ? ') ' + x[3] : '') + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : '');
+});
 </script>
 {% endblock %}

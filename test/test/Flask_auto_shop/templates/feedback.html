@@ -3,9 +3,415 @@
 {% block title %}Отзывы{% endblock %}
 
 {% block content %}
+<style>
+    .page-content {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+    
+    .page-content h2 {
+        font-size: 2.5rem;
+        font-weight: 300;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+    
+    .feedback-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        margin-bottom: 3rem;
+    }
+    
+    .reviews-section {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    }
+    
+    .reviews-section h3 {
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: #2c3e50;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+    
+    .reviews-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .review-card {
+        background: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: 8px;
+        border-left: 4px solid #3498db;
+    }
+    
+    .review-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+    
+    .reviewer-name {
+        font-weight: 500;
+        color: #2c3e50;
+    }
+    
+    .review-date {
+        color: #7f8c8d;
+        font-size: 0.9rem;
+    }
+    
+    .review-rating {
+        color: #f39c12;
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .review-text {
+        color: #555;
+        line-height: 1.6;
+        margin-bottom: 0.5rem;
+    }
+    
+    .review-car {
+        color: #3498db;
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+    
+    .no-reviews {
+        text-align: center;
+        color: #7f8c8d;
+        font-style: italic;
+        padding: 2rem;
+    }
+    
+    .feedback-form-section {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    }
+    
+    .feedback-form-section h3 {
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: #2c3e50;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+    
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #2c3e50;
+        font-weight: 400;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid #e0e0e0;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+        box-sizing: border-box;
+    }
+    
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: #3498db;
+    }
+    
+    .form-group textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+    
+    .rating-stars {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .star {
+        font-size: 1.5rem;
+        color: #ddd;
+        cursor: pointer;
+        transition: color 0.2s ease;
+    }
+    
+    .star:hover,
+    .star.active {
+        color: #f39c12;
+    }
+    
+    .submit-feedback {
+        width: 100%;
+        padding: 1rem;
+        background: #2ecc71;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+    
+    .submit-feedback:hover {
+        background: #27ae60;
+    }
+    
+    .back-link {
+        display: inline-block;
+        padding: 0.8rem 1.5rem;
+        background: #3498db;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: 400;
+        transition: all 0.3s ease;
+        border: 1px solid #3498db;
+        margin-top: 2rem;
+    }
+    
+    .back-link:hover {
+        background: transparent;
+        color: #3498db;
+    }
+    
+    .success-message {
+        background: #d4edda;
+        color: #155724;
+        padding: 1rem;
+        border-radius: 6px;
+        margin-bottom: 1rem;
+        text-align: center;
+        border: 1px solid #c3e6cb;
+    }
+    
+    @media (max-width: 768px) {
+        .feedback-container {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        .page-content {
+            padding: 1rem;
+        }
+        
+        .reviews-section,
+        .feedback-form-section {
+            padding: 1.5rem;
+        }
+    }
+</style>
+
 <div class="page-content">
-    <h2>Обратная связь</h2>
-    <p>Здесь будет форма обратной связи</p>
-    <a href="{{ url_for('index') }}">← На главную</a>
+    <h2>Отзывы наших клиентов</h2>
+    
+    <div id="successMessage" class="success-message" style="display: none;">
+        Спасибо за ваш отзыв! Он будет опубликован после проверки.
+    </div>
+    
+    <div class="feedback-container">
+        <div class="feedback-form-section">
+            <h3>Оставить отзыв</h3>
+            <form id="feedbackForm" onsubmit="submitFeedback(event)">
+                <div class="form-group">
+                    <label for="userName">Ваше имя *</label>
+                    <input type="text" id="userName" name="userName" required placeholder="Иван Иванов">
+                </div>
+                
+                <div class="form-group">
+                    <label for="carModel">Модель автомобиля *</label>
+                    <select id="carModel" name="carModel" required>
+                        <option value="">Выберите модель</option>
+                        <option value="Hyundai Sonata">Hyundai Sonata</option>
+                        <option value="Kia K5">Kia K5</option>
+                        <option value="Genesis G80">Genesis G80</option>
+                        <option value="Hyundai Tucson">Hyundai Tucson</option>
+                        <option value="Kia Sorento">Kia Sorento</option>
+                        <option value="Genesis GV80">Genesis GV80</option>
+                        <option value="Toyota Camry">Toyota Camry</option>
+                        <option value="Toyota RAV4">Toyota RAV4</option>
+                        <option value="Mitsubishi Lancer">Mitsubishi Lancer</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Оценка *</label>
+                    <div class="rating-stars">
+                        <span class="star" data-rating="1">★</span>
+                        <span class="star" data-rating="2">★</span>
+                        <span class="star" data-rating="3">★</span>
+                        <span class="star" data-rating="4">★</span>
+                        <span class="star" data-rating="5">★</span>
+                    </div>
+                    <input type="hidden" id="rating" name="rating" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="feedbackText">Ваш отзыв *</label>
+                    <textarea id="feedbackText" name="feedbackText" required placeholder="Поделитесь вашими впечатлениями о покупке автомобиля..."></textarea>
+                </div>
+                
+                <button type="submit" class="submit-feedback">Отправить отзыв</button>
+            </form>
+        </div>
+        
+        <div class="reviews-section">
+            <h3>Последние отзывы</h3>
+            <div class="reviews-list" id="reviewsList">
+                <div class="review-card">
+                    <div class="review-header">
+                        <span class="reviewer-name">Александр Петров</span>
+                        <span class="review-date">15.12.2023</span>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">Отличный сервис! Приобрел Hyundai Sonata, машина пришла в идеальном состоянии. Весь процесс от консультации до доставки занял 2 недели.</p>
+                    <div class="review-car">Hyundai Sonata</div>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-header">
+                        <span class="reviewer-name">Мария Сидорова</span>
+                        <span class="review-date">10.12.2023</span>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">Очень довольна покупкой Kia K5. Менеджеры профессиональные, ответили на все вопросы. Доставка быстрая, цены адекватные.</p>
+                    <div class="review-car">Kia K5</div>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-header">
+                        <span class="reviewer-name">Дмитрий Козлов</span>
+                        <span class="review-date">05.12.2023</span>
+                    </div>
+                    <div class="review-rating">★★★★☆</div>
+                    <p class="review-text">Купил Genesis G80. Качество автомобиля на высоте, но доставка заняла немного дольше обещанного. В целом - рекомендую!</p>
+                    <div class="review-car">Genesis G80</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <a href="{{ url_for('index') }}" class="back-link">← На главную</a>
 </div>
+
+<script>
+// Система рейтинга звездами
+const stars = document.querySelectorAll('.star');
+const ratingInput = document.getElementById('rating');
+let currentRating = 0;
+
+stars.forEach(star => {
+    star.addEventListener('click', function() {
+        const rating = parseInt(this.getAttribute('data-rating'));
+        currentRating = rating;
+        ratingInput.value = rating;
+        
+        stars.forEach(s => {
+            if (parseInt(s.getAttribute('data-rating')) <= rating) {
+                s.classList.add('active');
+            } else {
+                s.classList.remove('active');
+            }
+        });
+    });
+    
+    star.addEventListener('mouseover', function() {
+        const rating = parseInt(this.getAttribute('data-rating'));
+        
+        stars.forEach(s => {
+            if (parseInt(s.getAttribute('data-rating')) <= rating) {
+                s.style.color = '#f39c12';
+            } else {
+                s.style.color = '#ddd';
+            }
+        });
+    });
+    
+    star.addEventListener('mouseout', function() {
+        stars.forEach(s => {
+            if (parseInt(s.getAttribute('data-rating')) > currentRating) {
+                s.style.color = '#ddd';
+            }
+        });
+    });
+});
+
+function submitFeedback(event) {
+    event.preventDefault();
+    
+    const userName = document.getElementById('userName').value;
+    const carModel = document.getElementById('carModel').value;
+    const rating = document.getElementById('rating').value;
+    const feedbackText = document.getElementById('feedbackText').value;
+    
+    if (!rating) {
+        alert('Пожалуйста, поставьте оценку');
+        return;
+    }
+    
+    // Создаем новый отзыв
+    const reviewCard = document.createElement('div');
+    reviewCard.className = 'review-card';
+    
+    const stars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+    const currentDate = new Date().toLocaleDateString('ru-RU');
+    
+    reviewCard.innerHTML = `
+        <div class="review-header">
+            <span class="reviewer-name">${userName}</span>
+            <span class="review-date">${currentDate}</span>
+            </div>
+        <div class="review-rating">${stars}</div>
+        <p class="review-text">${feedbackText}</p>
+        <div class="review-car">${carModel}</div>
+    `;
+    
+    // Добавляем новый отзыв в начало списка
+    const reviewsList = document.getElementById('reviewsList');
+    reviewsList.insertBefore(reviewCard, reviewsList.firstChild);
+    
+    // Показываем сообщение об успехе
+    const successMessage = document.getElementById('successMessage');
+    successMessage.style.display = 'block';
+    
+    // Сбрасываем форму
+    document.getElementById('feedbackForm').reset();
+    currentRating = 0;
+    ratingInput.value = '';
+    
+    // Сбрасываем звезды
+    stars.forEach(star => {
+        star.classList.remove('active');
+        star.style.color = '#ddd';
+    });
+    
+    // Скрываем сообщение через 5 секунд
+    setTimeout(() => {
+        successMessage.style.display = 'none';
+    }, 5000);
+}
+</script>
 {% endblock %}
