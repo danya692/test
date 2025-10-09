@@ -1,0 +1,243 @@
+{% extends "base.html" %}
+
+{% block title %}Контакты{% endblock %}
+
+{% block content %}
+<style>
+    .page-content {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+    
+    .page-content h2 {
+        font-size: 2.5rem;
+        font-weight: 300;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+    
+    .contacts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+    }
+    
+    .contact-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        text-align: center;
+        transition: transform 0.3s ease;
+    }
+    
+    .contact-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .contact-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        display: block;
+    }
+    
+    .contact-card h3 {
+        font-size: 1.3rem;
+        font-weight: 400;
+        color: #2c3e50;
+        margin-bottom: 1rem;
+    }
+    
+    .contact-info {
+        color: #7f8c8d;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+    
+    .call-button {
+        display: inline-block;
+        padding: 0.8rem 2rem;
+        background: #2ecc71;
+        color: white;
+        text-decoration: none;
+        border-radius: 25px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        border: 2px solid #2ecc71;
+    }
+    
+    .call-button:hover {
+        background: transparent;
+        color: #2ecc71;
+        transform: translateY(-2px);
+    }
+    
+    .map-section {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        margin-bottom: 2rem;
+    }
+    
+    .map-section h3 {
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: #2c3e50;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+    
+    .map-placeholder {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 3rem 2rem;
+        text-align: center;
+        color: #7f8c8d;
+    }
+    
+    .map-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        display: block;
+    }
+    
+    .back-link {
+        display: inline-block;
+        padding: 0.8rem 1.5rem;
+        background: #3498db;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: 400;
+        transition: all 0.3s ease;
+        border: 1px solid #3498db;
+    }
+    
+    .back-link:hover {
+        background: transparent;
+        color: #3498db;
+    }
+    
+    .working-hours {
+        background: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-top: 1rem;
+        text-align: left;
+    }
+    
+    .working-hours h4 {
+        font-weight: 500;
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+    }
+    
+    @media (max-width: 768px) {
+        .contacts-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .page-content {
+            padding: 1rem;
+        }
+        
+        .contact-card {
+            padding: 1.5rem;
+        }
+    }
+</style>
+
+<div class="page-content">
+    <h2>Контакты</h2>
+    
+    <div class="contacts-grid">
+        <div class="contact-card">
+            <span class="contact-icon"></span>
+            <h3>Телефоны</h3>
+            <div class="contact-info">
+                <p><strong>+7 (999) 123-45-67</strong></p>
+                <p>+7 (495) 123-45-67</p>
+                <p>Москва и регионы</p>
+            </div>
+            <a href="tel:+79991234567" class="call-button">Позвонить</a>
+        </div>
+        
+        <div class="contact-card">
+            <span class="contact-icon"></span>
+            <h3>Электронная почта</h3>
+            <div class="contact-info">
+                <p><strong>info@koreaautodirect.ru</strong></p>
+                <p>sales@koreaautodirect.ru</p>
+                <p>support@koreaautodirect.ru</p>
+            </div>
+            <a href="mailto:info@koreaautodirect.ru" class="call-button">Написать</a>
+        </div>
+        
+        <div class="contact-card">
+            <span class="contact-icon"></span>
+            <h3>Адрес офиса</h3>
+            <div class="contact-info">
+                <p><strong>г. Москва</strong></p>
+                <p>ул. Автомобильная, д. 123</p>
+                <p>Бизнес-центр "АвтоПлаза"</p>
+            </div>
+            <a href="https://yandex.ru/maps/-/CDqyINdD" class="call-button" target="_blank">Построить маршрут</a>
+        </div>
+        
+        <div class="contact-card">
+            <span class="contact-icon"></span>
+            <h3>Время работы</h3>
+            <div class="contact-info">
+                <div class="working-hours">
+                    <h4>Понедельник - Пятница</h4>
+                    <p>9:00 - 20:00</p>
+                    
+                    <h4>Суббота - Воскресенье</h4>
+                    <p>10:00 - 18:00</p>
+                    
+                    <h4>Без перерыва</h4>
+                    <p>Работаем без выходных</p>
+                </div>
+            </div>
+            <a href="tel:+79991234567" class="call-button">Связаться</a>
+        </div>
+    </div>
+    
+    <div class="map-section">
+        <h3>Как нас найти</h3>
+        <div class="map-placeholder">
+            <span class="map-icon">🗺️</span>
+            <h4>Карта проезда</h4>
+            <p>г. Москва, ул. Автомобильная, д. 123</p>
+            <p>Ближайшее метро: Автозаводская (5 минут пешком)</p>
+            <a href="https://yandex.ru/maps/-/CDqyINdD" class="call-button" target="_blank" style="margin-top: 1rem;">Открыть в Яндекс.Картах</a>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 2rem;">
+        <a href="{{ url_for('index') }}" class="back-link">← На главную</a>
+    </div>
+</div>
+
+<script>
+// Функция для звонка
+function makeCall(phoneNumber) {
+    window.location.href = 'tel:${phoneNumber}';
+}
+
+// Функция для открытия карты
+function openMap() {
+    window.open('https://yandex.ru/maps/-/CDqyINdD', '_blank');
+}
+
+// Функция для отправки email
+function sendEmail(email) {
+    window.location.href = 'mailto:${email}';
+}
+</script>
+{% endblock %}

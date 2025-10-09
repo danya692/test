@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block title %}Приветствие{% endblock %}
+
+{% block content %}
+<section class="greeting-section">
+    <div class="greeting-card">
+        <div class="greeting-icon">👑</div>
+        <h1>Привет, мой господин {{ name }}!</h1>
+        <p class="greeting-text">Рады приветствовать вас в нашем автосалоне премиум-класса</p>
+        
+        <div class="personal-offer">
+            <h3>Специальное предложение для вас:</h3>
+            <div class="offer-card">
+                <span class="offer-badge">ЭКСКЛЮЗИВ</span>
+                <h4>Genesis G90 2024</h4>
+                <p>Полный комплект • Бесплатная доставка • Страховка в подарок</p>
+                <div class="offer-price">от 5 800 000 ₽</div>
+            </div>
+        </div>
+
+        <div class="quick-actions">
+            <a href="{{ url_for('catalog') }}" class="action-btn">Смотреть каталог</a>
+            <a href="{{ url_for('contact') }}" class="action-btn secondary">Консультация</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.greeting-section {
+    padding: 3rem 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+}
+
+.greeting-card {
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.greeting-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.greeting-card h1 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 2.2rem;
+}
+
+.greeting-text {
+    color: #7f8c8d;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.personal-offer {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 15px;
+    margin: 2rem 0;
+}
+
+.offer-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-left: 4px solid #e74c3c;
+    margin-top: 1rem;
+}
+
+.offer-badge {
+    background: #e74c3c;
+    color: white;
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.offer-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-top: 1rem;
+}
+
+.quick-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    padding: 1rem 2rem;
+    background: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+}
+
+.action-btn.secondary {
+    background: #95a5a6;
+}
+
+.action-btn.secondary:hover {
+    background: #7f8c8d;
+}
+</style>
+{% endblock %}

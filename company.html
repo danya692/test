@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block title %}О компании{% endblock %}
+
+{% block content %}
+<style>
+    .page-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 3rem 2rem;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    }
+    
+    .page-content h2 {
+        font-size: 2.5rem;
+        font-weight: 300;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #eaeaea;
+    }
+    
+    .company-info {
+        line-height: 1.8;
+        color: #555;
+        margin-bottom: 2rem;
+    }
+    
+    .company-info h3 {
+        font-size: 1.4rem;
+        font-weight: 400;
+        color: #2c3e50;
+        margin: 2rem 0 1rem 0;
+    }
+    
+    .company-info p {
+        margin-bottom: 1.5rem;
+        font-size: 1.1rem;
+    }
+    
+    .company-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+        padding: 2rem;
+        background: #f8f9fa;
+        border-radius: 10px;
+    }
+    
+    .stat-item {
+        text-align: center;
+        padding: 1.5rem;
+    }
+    
+    .stat-number {
+        display: block;
+        font-size: 2.5rem;
+        font-weight: 300;
+        color: #3498db;
+        margin-bottom: 0.5rem;
+    }
+    
+    .stat-label {
+        font-size: 0.9rem;
+        color: #7f8c8d;
+        font-weight: 400;
+    }
+    
+    .back-link {
+        display: inline-block;
+        padding: 0.8rem 1.5rem;
+        background: #3498db;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: 400;
+        transition: all 0.3s ease;
+        border: 1px solid #3498db;
+    }
+    
+    .back-link:hover {
+        background: transparent;
+        color: #3498db;
+    }
+    
+    @media (max-width: 768px) {
+        .page-content {
+            padding: 2rem 1rem;
+            margin: 1rem;
+        }
+        
+        .page-content h2 {
+            font-size: 2rem;
+        }
+        
+        .company-stats {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            padding: 1.5rem;
+        }
+        
+        .stat-item {
+            padding: 1rem;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+        }
+    }
+</style>
+
+<div class="page-content">
+    <h2>О компании</h2>
+    
+    <div class="company-info">
+        <p><strong>KOREA AUTO DIRECT</strong> — ведущая компания по поставкам качественных автомобилей из Южной Кореи в Россию. Мы работаем на рынке с 2022 года и за это время заслужили репутацию надежного партнера.</p>
+        
+        <h3>Наша миссия</h3>
+        <p>Сделать процесс покупки автомобиля простым, безопасным и выгодным для каждого клиента. Мы стремимся предоставлять только проверенные автомобили с полной историей обслуживания.</p>
+        
+        <h3>Преимущества работы с нами</h3>
+        <p>• Прямые контракты с корейскими дилерами<br>
+           • Тщательная проверка каждого автомобиля перед покупкой<br>
+           • Полное юридическое сопровождение сделки<br>
+           • Собственная логистическая служба<br>
+           • Гарантия лучшей цены на рынке</p>
+        
+        <h3>Наши партнеры</h3>
+        <p>Мы сотрудничаем с официальными дилерами Hyundai, Kia, Genesis, в Южной Корее, что позволяет нам предлагать автомобили непосредственно с конвейера.</p>
+        
+        <div class="company-stats">
+            <div class="stat-item">
+                <span class="stat-number">3+</span>
+                <span class="stat-label">года на рынке</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">100+</span>
+                <span class="stat-label">довольных клиентов</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">15</span>
+                <span class="stat-label">партнеров в Азии</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">98%</span>
+                <span class="stat-label">клиентов рекомендуют</span>
+            </div>
+        </div>
+        
+        <p>Наша команда — это профессионалы с многолетним опытом в автомобильном бизнесе, которые понимают потребности российских клиентов и знают все тонкости международных автомобильных поставок.</p>
+    </div>
+    
+    <a href="{{ url_for('index') }}" class="back-link">← На главную</a>
+</div>
+{% endblock %}

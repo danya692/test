@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+<style>
+    /* Минималистичный дизайн для главной страницы */
+    .hero {
+        text-align: center;
+        padding: 4rem 0;
+        background: linear-gradient;
+        color: rgb(0, 0, 0);
+        min-height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .hero-content {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+        font-weight: 300;
+        margin-bottom: 1rem;
+        line-height: 1.3;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.2rem;
+        font-weight: 300;
+        margin-bottom: 3rem;
+        opacity: 0.9;
+    }
+    
+    .hero-stats {
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+        margin: 2rem 0;
+    }
+    
+    .stat {
+        text-align: center;
+    }
+    
+    .stat-number {
+        display: block;
+        font-size: 2.5rem;
+        font-weight: 300;
+        margin-bottom: 0.5rem;
+    }
+    
+    .stat-label {
+        font-size: 0.9rem;
+        opacity: 0.8;
+        font-weight: 300;
+    }
+    
+    .cta-button {
+        display: inline-block;
+        background: white;
+        color: #667eea;
+        padding: 1rem 2.5rem;
+        text-decoration: none;
+        border-radius: 25px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+        margin-top: 1rem;
+    }
+    
+    .cta-button:hover {
+        background: transparent;
+        color: white;
+        border: 2px solid white;
+        transform: translateY(-2px);
+    }
+    
+    .features {
+        padding: 4rem 0;
+        text-align: center;
+        background: white;
+    }
+    
+    .features h2 {
+        font-size: 2rem;
+        font-weight: 300;
+        color: #2c3e50;
+        margin-bottom: 3rem;
+    }
+    
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    
+    .feature-card {
+        padding: 2rem 1.5rem;
+        background: #f8f9fa;
+        border-radius: 10px;
+        transition: transform 0.3s ease;
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .feature-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .feature-card h3 {
+        font-size: 1.3rem;
+        font-weight: 400;
+        color: #2c3e50;
+        margin-bottom: 1rem;
+    }
+    
+    .feature-card p {
+        color: #7f8c8d;
+        line-height: 1.6;
+        font-weight: 300;
+    }
+    
+    /* Адаптивность */
+    @media (max-width: 768px) {
+        .hero h1 {
+            font-size: 2rem;
+        }
+        
+        .hero-stats {
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+        }
+        
+        .features-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Добро пожаловать в KOREA AUTO DIRECT{% if name %}!{% endif %}</h1>
+        <p class="hero-subtitle">Прямые поставки автомобилей из Южной Кореи в Россию</p>
+        <div class="hero-stats">
+            <div class="stat">
+                <span class="stat-number">100+</span>
+                <span class="stat-label">авто доставлено</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">98%</span>
+                <span class="stat-label">довольных клиентов</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">15</span>
+                <span class="stat-label">дней доставка</span>
+            </div>
+        </div>
+        <a href="{{ url_for('catalog') }}" class="cta-button">Смотреть каталог</a>
+    </div>
+</section>
+<section class="features">
+    <h2>Почему выбирают нас?</h2>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon"></div>
+            <h3>Прямые поставки</h3>
+            <p>Работаем напрямую с корейскими автосалонами</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"></div>
+            <h3>Гарантия качества</h3>
+            <p>Тщательная проверка каждого автомобиля</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"></div>
+            <h3>Лучшие цены</h3>
+            <p>Отсутствие посредников - выгодные условия</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
